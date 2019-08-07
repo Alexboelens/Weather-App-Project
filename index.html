@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <title>index.html</title>
+
+</head>
+
+<body>
+    <div class="websiteContainer" id="app">
+
+        <div class="wrap3" v-if='!isLoading'>
+
+            <div class="wrap">
+                <h1 class="title">Weather App</h1>
+                <div class="input">
+                    <input v-model="search" type="text" placeholder="Enter City Here" autofocus>
+                    <button class="button" v-on:click="getData">Search</button>
+                </div>
+            </div>
+
+
+            <div class="content">
+                <div class="content1">
+
+                    <p>{{data.city.name}}
+                        <p>
+                            <p>Country: {{data.city.country}}</p>
+
+                            <p>Population: {{data.city.population}}</p>
+                            <p>Latitude: {{data.city.coord.lat}}</p>
+                            <p>Longitude: {{data.city.coord.lon}}</p>
+                </div>
+                
+                <div class="content2">
+                    <img class="logo" src="images/image1.png" alt="Logo">
+                </div>
+            </div>
+
+            <div class="wrap2">
+                <p class="title2">24 Hour/3Hour Forecast</p>
+            </div>
+
+            <div class="forecast">
+                <table class="table">
+                    <tr>
+                        <td>Date</td> 
+                        <td>{{date[0]}}</td>
+                        <td>{{date[1]}}</td>
+                        <td>{{date[2]}}</td>
+                        <td>{{date[3]}}</td>
+                        <td>{{date[4]}}</td>
+                        <td>{{date[5]}}</td>
+                        <td>{{date[6]}}</td>
+                        <td>{{date[7]}}</td>
+                    </tr>
+                    <tr>
+                        <td>Time</td>
+                        <td>{{hour[0]}}</td>
+                        <td>{{hour[1]}}</td>
+                        <td>{{hour[2]}}</td>
+                        <td>{{hour[3]}}</td>
+                        <td>{{hour[4]}}</td>
+                        <td>{{hour[5]}}</td>
+                        <td>{{hour[6]}}</td>
+                        <td>{{hour[7]}}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><img class="icon" v-bind:src="'http://openweathermap.org/img/w/'+icon[0]+'.png'" alt="Weather Icon" /></td>
+                        <td><img class="icon" v-bind:src="'http://openweathermap.org/img/w/'+icon[1]+'.png'" alt="Weather Icon" /></td>
+                        <td><img class="icon" v-bind:src="'http://openweathermap.org/img/w/'+icon[2]+'.png'" alt="Weather Icon" /></td>
+                        <td><img class="icon" v-bind:src="'http://openweathermap.org/img/w/'+icon[3]+'.png'" alt="Weather Icon" /></td>
+                        <td><img class="icon" v-bind:src="'http://openweathermap.org/img/w/'+icon[4]+'.png'" alt="Weather Icon" /></td>
+                        <td><img class="icon" v-bind:src="'http://openweathermap.org/img/w/'+icon[5]+'.png'" alt="Weather Icon" /></td>
+                        <td><img class="icon" v-bind:src="'http://openweathermap.org/img/w/'+icon[6]+'.png'" alt="Weather Icon" /></td>
+                        <td><img class="icon" v-bind:src="'http://openweathermap.org/img/w/'+icon[7]+'.png'" alt="Weather Icon" /></td>
+                    </tr>
+                    <tr>
+                        <td>Temperature</td>
+                        <td>{{temp[0]}}°</td>
+                        <td>{{temp[1]}}°</td>
+                        <td>{{temp[2]}}°</td>
+                        <td>{{temp[3]}}°</td>
+                        <td>{{temp[4]}}°</td>
+                        <td>{{temp[5]}}°</td>
+                        <td>{{temp[6]}}°</td>
+                        <td>{{temp[7]}}°</td>
+                    </tr>
+                    <tr>
+                        <td>Wind Speed</td>
+                        <td>{{windSpd[0]}} meter/s</td>
+                        <td>{{windSpd[1]}} meter/s</td>
+                        <td>{{windSpd[2]}} meter/s</td>
+                        <td>{{windSpd[3]}} meter/s</td>
+                        <td>{{windSpd[4]}} meter/s</td>
+                        <td>{{windSpd[5]}} meter/s</td>
+                        <td>{{windSpd[6]}} meter/s</td>
+                        <td>{{windSpd[7]}} meter/s</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="wrap3">
+                <p class="title3">Forecast Upcoming Days</p>
+            </div>
+
+            <div class="days-wrap">
+                <div class="day">
+                    <table>
+                        <tr>
+                            <td>{{day2Date[0]}}</td>
+                        </tr>
+                        <tr>
+                            <td><img class="day-icon" v-bind:src="'http://openweathermap.org/img/w/'+day2Icons[4]+'.png'" alt="Weather Icon" /></td>
+                        </tr>
+                        <tr>
+                            <td>Min {{day2Min}}°</td>
+                        </tr>
+                        <tr>
+                            <td>Max {{day2Max}}°</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="day">
+                    <table>
+                        <tr>
+                            <td>{{day3Date[0]}}</td>
+                        </tr>
+                        <tr>
+                            <td><img class="day-icon" v-bind:src="'http://openweathermap.org/img/w/'+day3Icons[4]+'.png'" alt="Weather Icon" /></td>
+                        </tr>
+                        <tr>
+                            <td>Min {{day3Min}}°</td>
+                        </tr>
+                        <tr>
+                            <td>Max {{day3Max}}°</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="day">
+                    <table>
+                        <tr>
+                            <td>{{day4Date[0]}}</td>
+                        </tr>
+                        <tr>
+                            <td><img class="day-icon" v-bind:src="'http://openweathermap.org/img/w/'+day4Icons[4]+'.png'" alt="Weather Icon" /></td>
+                        </tr>
+                        <tr>
+                            <td>Min {{day4Min}}°</td>
+                        </tr>
+                        <tr>
+                            <td>Max {{day5Max}}°</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="day">
+                    <table>
+                        <tr>
+                            <td>{{day5Date[0]}}</td>
+                        </tr>
+                        <tr>
+                            <td><img class="day-icon" v-bind:src="'http://openweathermap.org/img/w/'+day5Icons[4]+'.png'" alt="Weather Icon" /></td>
+                        </tr>
+                        <tr>
+                            <td>Min {{day5Min}}°</td>
+                        </tr>
+                        <tr>
+                            <td>Max {{day5Max}}°</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="main.js"></script>
+
+</body></html>
